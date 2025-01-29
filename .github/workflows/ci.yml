@@ -21,10 +21,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Clean Gradle Cache  # ✅ Fix for corrupted cache issues
+      run: rm -rf ~/.gradle/caches
+
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.9'  # ✅ Ensuring Java 17 compatibility
 
-    - name: Grant execute permission to Gradle Wrapper  # ✅ FIX for Permission Denied
+    - name: Grant execute permission to Gradle Wrapper
       run: chmod +x gradlew
 
     - name: Build with Gradle Wrapper
